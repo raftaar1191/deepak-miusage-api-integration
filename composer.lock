@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WPBoilerplate/wpb-register-blocks.git",
-                "reference": "7ef4f2212e4567a8487c90069c62337893133fc9"
+                "reference": "ec4964a0826e7bc167f5c5695f5923477d58d97e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WPBoilerplate/wpb-register-blocks/zipball/7ef4f2212e4567a8487c90069c62337893133fc9",
-                "reference": "7ef4f2212e4567a8487c90069c62337893133fc9",
+                "url": "https://api.github.com/repos/WPBoilerplate/wpb-register-blocks/zipball/ec4964a0826e7bc167f5c5695f5923477d58d97e",
+                "reference": "ec4964a0826e7bc167f5c5695f5923477d58d97e",
                 "shasum": ""
             },
             "default-branch": true,
@@ -46,7 +46,7 @@
                 "issues": "https://github.com/WPBoilerplate/wpb-register-blocks/issues",
                 "source": "https://github.com/WPBoilerplate/wpb-register-blocks/tree/main"
             },
-            "time": "2025-06-12T13:31:11+00:00"
+            "time": "2025-07-05T16:34:00+00:00"
         }
     ],
     "packages-dev": [],

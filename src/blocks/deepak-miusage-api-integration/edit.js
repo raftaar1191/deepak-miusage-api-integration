@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { InspectorControls } from '@wordpress/block-editor';
+import { useBlockProps,InspectorControls } from '@wordpress/block-editor';
 
 import { PanelBody, ToggleControl, Spinner } from '@wordpress/components';
 
@@ -67,7 +67,7 @@ export default function Edit({ attributes, setAttributes }) {
         </PanelBody>
       </InspectorControls>
 
-      <div className="miusage-table-block">
+      <div {...useBlockProps()}>
         {loading ? (
           <Spinner />
         ) : (

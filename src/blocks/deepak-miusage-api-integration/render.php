@@ -1,7 +1,15 @@
 <?php
 /**
- * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
+ * Server-side rendering for the Miusage Data Table Block.
+ *
+ * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/#render
  */
+
+use Deepak_Miusage_API_Integration\Includes\API_Handler;
+
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
 
 $attributes = $attributes ?? [];
 
@@ -15,17 +23,21 @@ $defaults = [
 
 $atts = wp_parse_args( $attributes, $defaults );
 
-$data = get_transient( 'deepak_miusage_api_data' );
+// Fetch data from transient.
+$data = API_Handler::get_data();
 
-if ( ! $data ) {
-	return '<p>' . esc_html__( 'No data available.', 'deepak-miusage-api-integration' ) . '</p>';
+if ( empty( $data ) || ! is_array( $data ) ) {
+	echo '<p>' . esc_html__( 'No data available.', 'deepak-miusage-api-integration' ) . '</p>';
 }
 
 $rows = $data['data']['rows'] ?? [];
 
-ob_start();
+if ( empty( $rows ) ) {
+	echo '<p>' . esc_html__( 'No rows to display.', 'deepak-miusage-api-integration' ) . '</p>';
+}
+
 ?>
-<div class="miusage-table-block">
+<div <?php echo get_block_wrapper_attributes(); ?>>
 	<table>
 		<thead>
 			<tr>
@@ -43,11 +55,10 @@ ob_start();
 					<?php if ( $atts['showFirstName'] ) : ?><td><?php echo esc_html( $row['fname'] ); ?></td><?php endif; ?>
 					<?php if ( $atts['showLastName'] ) : ?><td><?php echo esc_html( $row['lname'] ); ?></td><?php endif; ?>
 					<?php if ( $atts['showEmail'] ) : ?><td><?php echo esc_html( $row['email'] ); ?></td><?php endif; ?>
-					<?php if ( $atts['showDate'] ) : ?><td><?php echo esc_html( date( 'Y-m-d H:i', $row['date'] ) ); ?></td><?php endif; ?>
+					<?php if ( $atts['showDate'] ) : ?><td><?php echo esc_html( date( 'Y-m-d H:i', (int) $row['date'] ) ); ?></td><?php endif; ?>
 				</tr>
 			<?php endforeach; ?>
 		</tbody>
 	</table>
 </div>
 <?php
-return ob_get_clean();
